@@ -16,7 +16,6 @@ n_steps: 16          # per-environment rollout length before each PPO update
 batch_size: 8192
 n_epochs: 5
 learning_rate: 3.0e-4
-lr_schedule: "constant"
 gamma: 0.99
 gae_lambda: 0.95
 clip_range: 0.2
