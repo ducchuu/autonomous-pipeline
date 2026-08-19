@@ -71,7 +71,7 @@ from stable_baselines3.common.vec_env import VecNormalize
 
 from isaaclab.envs import DirectRLEnvCfg
 from isaaclab_rl.sb3 import Sb3VecEnvWrapper, process_sb3_cfg
-from isaaclab_tasks.utils import parse_env_cfg
+from isaaclab_tasks.utils import parse_env_cfg, load_cfg_from_registry
 
 import autonomous_pipeline.tasks  # noqa: F401  (registers all 3 Isaac-Drone*-Direct-v0 ids)
 
@@ -84,9 +84,10 @@ def main() -> None:
     env = gym.make(args_cli.task, cfg=env_cfg)
     env = Sb3VecEnvWrapper(env)
 
-    agent_cfg = process_sb3_cfg(
-        gym.spec(args_cli.task).kwargs["sb3_cfg_entry_point"]
-    )
+    sb3_cfg = load_cfg_from_registry(args_cli.task, "sb3_cfg_entry_point")
+    agent_cfg = process_sb3_cfg(sb3_cfg, num_envs=env.unwrapped.num_envs)
+
+
     n_timesteps = agent_cfg.pop("n_timesteps")
     if args_cli.max_iterations is not None:
         n_timesteps = args_cli.max_iterations

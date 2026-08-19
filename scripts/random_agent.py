@@ -7,6 +7,7 @@ Usage: python scripts/random_agent.py --num_envs 16
 """
 
 import argparse
+import torch
 
 from isaaclab.app import AppLauncher
 
@@ -33,6 +34,7 @@ def main() -> None:
     env.reset()
     while simulation_app.is_running():
         actions = env.action_space.sample()
+        actions = torch.tensor(actions, dtype=torch.float32, device=env.unwrapped.device)
         obs, reward, terminated, truncated, info = env.step(actions)
 
     env.close()
