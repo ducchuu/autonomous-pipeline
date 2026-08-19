@@ -1,0 +1,31 @@
+# Stable-Baselines3 PPO hyperparameters for the drone task family (Isaac-DroneHover-Direct-v0, Isaac-DroneFigure8-Direct-v0, Isaac-DroneShuttleRun-Direct-v0).
+#
+# Loaded by scripts/sb3/train.py via the isaaclab_rl.sb3 process_sb3_cfg
+# helper, per https://isaac-sim.github.io/IsaacLab/main/source/how-to/wrap_rl_env.html
+#
+# Starting points below are adapted from Isaac Lab's own shipped quadcopter
+# SB3 config (same task family: single rigid body, direct thrust actuation,
+# short-ish episodes) -- tune based on your own training curves, these are
+# not guaranteed-optimal for your exact reward/physics tuning.
+
+seed: 42
+n_timesteps: 20_000_000
+policy: "MlpPolicy"
+
+n_steps: 16          # per-environment rollout length before each PPO update
+batch_size: 8192
+n_epochs: 5
+learning_rate: 3.0e-4
+lr_schedule: "constant"
+gamma: 0.99
+gae_lambda: 0.95
+clip_range: 0.2
+ent_coef: 0.0025
+vf_coef: 0.5
+max_grad_norm: 1.0
+
+policy_kwargs: "dict(activation_fn=nn.ELU, net_arch=[128, 128, 64])"
+
+normalize_input: true
+normalize_value: true
+clip_obs: 10.0

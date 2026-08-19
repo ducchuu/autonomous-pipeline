@@ -1,0 +1,11 @@
+[package]
+version = "0.1.0"
+title = "Autonomous Pipeline - Drone Navigation"
+description = "Custom Isaac Lab Direct RL task for a real 5-inch FPV quadcopter, trained with Stable-Baselines3 PPO."
+category = "robotics"
+keywords = ["isaaclab", "reinforcement-learning", "quadcopter", "drone", "sb3", "ppo"]
+
+[dependencies]
+"isaaclab" = {}
+"isaaclab_assets" = {}
+"isaaclab_tasks" = {}

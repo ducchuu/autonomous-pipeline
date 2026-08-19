@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autonomous_pipeline"
+version = "0.1.0"
+description = "Isaac Lab extension: custom 5-inch FPV drone Direct RL navigation task."
+readme = "../../README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["autonomous_pipeline*"]
+
+[tool.pytest.ini_options]
+testpaths = ["../../tests"]
