@@ -250,13 +250,12 @@ class DroneTaskEnv(DirectRLEnv):
         """Called every physics sub-step. Applies the cached body-frame
         force/torque to the drone rigid body.
         """
-        self.robot.root_physx_view.apply_forces_and_torques_at_position(
-            force_data=self._forces_b,
-            torque_data=self._torques_b,
-            position_data=None,
-            indices=self._robot_indices(),
-            is_global=False,
+        self.robot.set_external_force_and_torque(
+            forces=self._forces_b.unsqueeze(1),
+            torques=self._torques_b.unsqueeze(1),
+            body_ids=[0],
         )
+
 
 
 

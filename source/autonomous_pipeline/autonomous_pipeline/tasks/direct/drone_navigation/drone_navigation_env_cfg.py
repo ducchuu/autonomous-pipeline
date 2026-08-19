@@ -20,7 +20,7 @@ signature if any of this fails to import.
 """
 
 from __future__ import annotations
-
+import os
 import math
 
 import isaaclab.sim as sim_utils
@@ -29,7 +29,8 @@ from isaaclab.envs import DirectRLEnvCfg
 from isaaclab.scene import InteractiveSceneCfg
 from isaaclab.sim import SimulationCfg
 from isaaclab.terrains import TerrainImporterCfg
-from isaaclab.utils import configclass
+from isaaclab.utils.configclass import configclass
+
 
 from . import physics
 from .task_targets import (
@@ -107,7 +108,7 @@ class DroneNavigationSceneCfg(InteractiveSceneCfg):
     robot: RigidObjectCfg = RigidObjectCfg(
         prim_path="{ENV_REGEX_NS}/Robot",
         spawn=sim_utils.UsdFileCfg(
-            usd_path=MESH_USD_PATH,
+            usd_path = f"{os.path.dirname(os.path.abspath(__file__))}/../../../data/5-inch_drone.usdc",
             rigid_props=sim_utils.RigidBodyPropertiesCfg(
                 disable_gravity=False,
                 max_depenetration_velocity=10.0,
